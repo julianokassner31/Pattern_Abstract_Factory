@@ -5,7 +5,6 @@ import br.com.algaworks.factory.gerador.boleto.GeradorBoleto;
 import br.com.algaworks.factory.gerador.nfe.GeradorNotaFiscal;
 import br.com.algaworks.factory.imposto.CalculoImposto;
 
-//enum banco
 public abstract class GeradorNotaFiscalFactory {
 
 	private EnumBancos banco;
