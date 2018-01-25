@@ -9,7 +9,6 @@ public class NotaFiscalEletronica {
 	private List<Produto> listProdutos = new ArrayList<>();
 	private double valorTotalProdutos = 0.0;
 	private double valorImposto = 0.0;
-	private double valorTotalNota = 0.0;
 	private String emissor;
 	
 	public String getNomeCliente() {
@@ -37,10 +36,7 @@ public class NotaFiscalEletronica {
 		this.valorImposto = valorImposto;
 	}
 	public double getValorTotalNota() {
-		return valorTotalNota;
-	}
-	public void setValorTotalNota(double valorTotalNota) {
-		this.valorTotalNota = valorTotalNota;
+		return getValorTotalProdutos() + getValorImposto();
 	}
 	public String getEmissor() {
 		return emissor;

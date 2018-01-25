@@ -5,16 +5,26 @@ import java.util.List;
 
 import br.com.algaworks.factory.enums.EnumBancos;
 import br.com.algaworks.factory.gerador.nfe.GeradorNotaFiscal;
-import br.com.algaworks.factory.gerador.nfe.GeradorNotaFiscalSP;
 import br.com.algaworks.factory.pojo.Produto;
 
 public class DesafioAbsFactory {
 
 	public static void main(String[] args) {
 		
-		GeradorNotaFiscalFactory factory = new GeradorNotaFiscalSPFactory(EnumBancos.BANCO_DO_BRASIL);
-		GeradorNotaFiscal geradorNFE = new GeradorNotaFiscalSP(factory);
-		geradorNFE.gerarNota("Juliano", getProdutos());
+		GeradorNotaFiscalFactory factory = new GeradorNotaFiscalSPFactory(EnumBancos.BB);
+		GeradorNotaFiscal geradorNFE = factory.getGeradorNotaFiscal();
+		System.out.println("Gerando nota fiscal e boleto para São Paulo!");
+		geradorNFE.gerarNotaFiscal("Juliano", getProdutos());
+		
+		factory = new GeradorNotaFiscalPRFactory(EnumBancos.ITAU);
+		geradorNFE = factory.getGeradorNotaFiscal();
+		System.out.println("Gerando nota fiscal e boleto para o Paraná!");
+		geradorNFE.gerarNotaFiscal("Juliano", getProdutos());
+		
+		factory = new GeradorNotaFiscalMTFactory(EnumBancos.SANTANDER);
+		geradorNFE = factory.getGeradorNotaFiscal();
+		System.out.println("Gerando nota fiscal e boleto para o Mato Grosso!");
+		geradorNFE.gerarNotaFiscal("Juliano", getProdutos());
 	}
 	
 	public static List<Produto> getProdutos(){

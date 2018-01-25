@@ -1,16 +1,12 @@
 package br.com.algaworks.factory.enums;
 
 import br.com.algaworks.factory.gerador.boleto.GeradorBoleto;
-import br.com.algaworks.factory.gerador.boleto.GeradorBoletoBB;
-import br.com.algaworks.factory.gerador.boleto.GeradorBoletoItau;
-import br.com.algaworks.factory.gerador.boleto.GeradorBoletoSantander;
 
 public enum EnumBancos {
 
-	
-	BANCO_DO_BRASIL(1, new GeradorBoletoBB()),
-	ITAU(2, new GeradorBoletoItau()),
-	SANTANDER(3, new GeradorBoletoSantander());
+	BB(1, new GeradorBoleto("Banco do Brasil")),
+	ITAU(2, new GeradorBoleto("Itau Unibanco")),
+	SANTANDER(3, new GeradorBoleto("Santander"));
 	
 	private GeradorBoleto geradorBoleto;
 	private int id;
@@ -27,5 +23,4 @@ public enum EnumBancos {
 	public int getId() {
 		return id;
 	}
-	
 }
