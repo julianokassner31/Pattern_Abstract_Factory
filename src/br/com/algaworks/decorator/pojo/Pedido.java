@@ -5,5 +5,18 @@ import java.util.List;
 
 public class Pedido {
 
-	List<Item> itens = new ArrayList<Item>();
+	private List<Item> itens = new ArrayList<Item>();
+
+	public List<Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
+	}
+
+	public double total() {
+		return itens.stream().mapToDouble( i -> i.getPreco()).sum();
+	}
+	
 }
