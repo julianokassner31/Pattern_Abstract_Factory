@@ -11,10 +11,4 @@ public class SanduicheFrangoTeriyaki extends Sanduiche{
 		super(tipoPao, tamanho, preco);
 		this.descricao = "Sanduíche Frango Teriyaki";
 	}
-
-	@Override
-	public double getPreco() {
-		return 10.50;
-	}
-
 }

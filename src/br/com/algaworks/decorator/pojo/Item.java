@@ -1,6 +1,6 @@
 package br.com.algaworks.decorator.pojo;
 
-public abstract class Item {
+public abstract class Item implements Cloneable{
 	
 	protected String descricao;
 	

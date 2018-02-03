@@ -13,9 +13,9 @@ import br.com.algaworks.decorator.pojo.CopoCocaCola;
 import br.com.algaworks.decorator.pojo.Item;
 import br.com.algaworks.decorator.pojo.Pedido;
 import br.com.algaworks.decorator.pojo.Sanduiche;
+import br.com.algaworks.decorator.pojo.adicional.AdicionalDecorator;
+import br.com.algaworks.decorator.pojo.adicional.AdicionalFactory;
 import br.com.algaworks.decorator.pojo.adicional.EnumAdicionais;
-import br.com.algaworks.decorator.pojo.adicional.MolhoFrangoTeriyaki;
-import br.com.algaworks.decorator.pojo.adicional.QueijoSuico;
 /**
  * Demonstrando o funcionamento do Padrao de Projeto Decorator
  * O mesmo e usado quando se tem um objeto que pode ter caracteristicas adicionadas
@@ -42,20 +42,29 @@ public class ClienteSubeUai {
 		
 		Sanduiche sanduiche = sanduicheFactory.criarSanduiche(tipoDePao, tamanhoDoPao);
 		
-		boolean adicional = false;
+		int idAdicional = 0;
+		AdicionalFactory adicionalFactory = null;
+		AdicionalDecorator adicionalDecorator = null;
 		
 		do {
-			int idAdicional = Integer.parseInt(JOptionPane.showInputDialog("Deseja mais algum Adicional?\n"
+			idAdicional = Integer.parseInt(JOptionPane.showInputDialog("Mais algum Adicional?\nQual?\n"
 					+ EnumAdicionais.mostrarOpcoesDisponiveis()));
-			if(adicional) {
-				
-			}
 			
-		}while(adicional);
-		
-		//Adicionais
-		Item adicionalQueijoSuico = new QueijoSuico(sanduiche);
-		Item adicionalMolhoFrangoTeriyaki = new MolhoFrangoTeriyaki(adicionalQueijoSuico);
+			if(idAdicional > 0 ) {
+				
+				if(adicionalDecorator == null) {
+					adicionalFactory = EnumAdicionais.getAdicionalFactory(idAdicional);
+					adicionalDecorator = adicionalFactory.criarAdicional(sanduiche);
+				
+				}else {
+					adicionalFactory = EnumAdicionais.getAdicionalFactory(idAdicional);
+					AdicionalDecorator ad = adicionalFactory.criarAdicional(adicionalDecorator);
+					adicionalDecorator = null;
+					adicionalDecorator = (AdicionalDecorator) ad.clone();
+				}
+			}
+				
+		}while(idAdicional > 0 );
 		
 		//Bebidas
 		Item cocaCola = new CopoCocaCola();
@@ -63,9 +72,13 @@ public class ClienteSubeUai {
 		//Pedido
 		Pedido pedido = new Pedido();
 		pedido.getItens().add(cocaCola);
-		pedido.getItens().add(cocaCola);
-		pedido.getItens().add(adicionalMolhoFrangoTeriyaki);
-		pedido.getItens().add(adicionalMolhoFrangoTeriyaki);
+		
+		if(adicionalDecorator == null) {
+			pedido.getItens().add(sanduiche);
+		
+		}else {
+			pedido.getItens().add(adicionalDecorator);
+		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'ás' HH:mm");
 		System.out.printf("Pedido feito em %s\n", sdf.format(new Date()));

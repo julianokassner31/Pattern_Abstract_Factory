@@ -15,10 +15,21 @@ public enum EnumAdicionais {
 		this.nome = nome;
 		this.adicionalFactory = adicionalFactory;
 	}
+	
+	public static AdicionalFactory getAdicionalFactory(int id) throws Exception {
+		
+		for (EnumAdicionais e : EnumAdicionais.values()) {
+			if(e.getId() == id) {
+				return e.getAdicionalFactory();
+			}
+		}
+		
+		throw new Exception("Esta opção não existe!");
+	}
 
 	public static String mostrarOpcoesDisponiveis() {
 		StringBuilder sb = new StringBuilder();
-		
+		sb.append("0 = Não\n");
 		for (EnumAdicionais e : EnumAdicionais.values()) {
 			sb.append(e.getId()+" = "+e.getNome()+"\n");
 		}
