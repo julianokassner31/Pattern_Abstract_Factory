@@ -1,6 +1,12 @@
 package br.com.algaworks.adapter;
 import java.io.IOException;
 
+
+/**
+ * 
+ * @author kassner
+ *Estudo do padrao de projeto Adapter - Seguindo exemplos do livro use a cabeça - Desinger Patterns
+ */
 public class Principal {
 
 	public static void main(String[] args) throws IOException {
