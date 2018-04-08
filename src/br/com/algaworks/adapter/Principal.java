@@ -23,13 +23,9 @@ public class Principal {
 		System.out.println("Percorrendo lista de pessoas com Iterator -> lista enumeration adaptada para iterator");
 		ListPessoasAdapterToIterator listaAdaptada = new ListPessoasAdapterToIterator(new ListPessoasEnumeration());
 		while(listaAdaptada.hasNext()) {
-			try {
-				Pessoa pessoa = listaAdaptada.next();
-				pessoa.falarNomeEOcupcao();
-				listaAdaptada.remove();
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
+			Pessoa pessoa = listaAdaptada.next();
+			pessoa.falarNomeEOcupcao();
+			listaAdaptada.remove();
 		}
 	}
 }
